@@ -1,0 +1,27 @@
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-full-version: "132.0.6834.112"
+sec-ch-ua-arch: "arm"
+sec-ch-ua-platform: "macOS"
+sec-ch-ua-platform-version: "13.0.1"
+sec-ch-ua-model: ""
+sec-ch-ua-bitness: "64"
+sec-ch-ua-wow64: ?0
+sec-ch-ua-full-version-list: "Not A(Brand";v="8.0.0.0", "Chromium";v="132.0.6834.112", "Google Chrome";v="132.0.6834.112"
+sec-ch-ua-form-factors: "Desktop"
+sec-ch-prefers-color-scheme: light
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: ja,en-US;q=0.9,en;q=0.8
+Cookie: users=%7B%22user%22%3A%7B%22id%22%3A%225e73dea6-76d0-4a1b-9d26-1dd3bda381f7%22%2C%22email%22%3A%22admin%40example.com%22%2C%22name%22%3A%22admin%22%2C%22is_active%22%3Atrue%2C%22role%22%3A0%2C%22widget_id%22%3Anull%7D%7D; chats=%7B%22currentConversation%22%3A%22a300c5d8-eed1-4e7b-8805-abba1df3ba16%22%2C%22currentSettings%22%3A%7B%22title%22%3A%22%E3%81%9F%E3%81%84%22%2C%22folder%22%3A%5B%22Rakuten%22%5D%7D%2C%22conversationSettings%22%3A%5B%7B%22session_id%22%3A%22a300c5d8-eed1-4e7b-8805-abba1df3ba16%22%2C%22mode%22%3A%22detail%22%2C%22model_type%22%3A%22gpt-4o%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%22a0c7836f-899a-44f0-906c-35fe6fb7ca93%22%2C%22mode%22%3A%22detail%22%2C%22model_type%22%3A%22gpt-4o%22%2C%22temperature%22%3A%5B0%5D%7D%5D%2C%22feedback%22%3Anull%2C%22resubmitValue%22%3Anull%2C%22refetchChatList%22%3Afalse%7D; GAESA=Co4BMDBjYTM2OTVkMmRiMDkxNjA3YWFkZGJkMjM4OTVlYWJjMGY0YTVhNWM3OTJkM2NiYWVhOWU1OTkxYTYyMzQ4NjEwMzk5NGEyM2M5NjI1MzM4MGYzOTY3MmZmMjRmOGZiODEyZmEzMDQ5MGJiOTIyYjFkYjJlODA0ZGIwYmIyMTk2NGViNWRkNTdmODcyZhCv1ZuezzI
+
