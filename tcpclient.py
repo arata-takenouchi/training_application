@@ -35,6 +35,6 @@ class TCPClient:
     finally:
       print("=== stop client ===")
 
-if __name__ == 'main':
+if __name__ == '__main__':
   client = TCPClient()
   client.request()
