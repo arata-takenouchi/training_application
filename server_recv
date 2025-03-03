@@ -1,0 +1,25 @@
+GET /favicon.ico HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua-full-version-list: "Not(A:Brand";v="99.0.0.0", "Google Chrome";v="133.0.6943.142", "Chromium";v="133.0.6943.142"
+sec-ch-ua-platform: "macOS"
+sec-ch-ua: "Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"
+sec-ch-ua-bitness: "64"
+sec-ch-ua-model: ""
+sec-ch-ua-mobile: ?0
+sec-ch-ua-form-factors: "Desktop"
+sec-ch-ua-wow64: ?0
+sec-ch-ua-arch: "arm"
+sec-ch-ua-full-version: "133.0.6943.142"
+sec-ch-prefers-color-scheme: light
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
+sec-ch-ua-platform-version: "13.0.1"
+Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: image
+Referer: http://localhost:8080/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: ja,en-US;q=0.9,en;q=0.8
+Cookie: users=%7B%22user%22%3A%7B%22id%22%3A%225e73dea6-76d0-4a1b-9d26-1dd3bda381f7%22%2C%22email%22%3A%22admin%40example.com%22%2C%22name%22%3A%22admin%22%2C%22is_active%22%3Atrue%2C%22role%22%3A0%2C%22widget_id%22%3Anull%7D%7D; GAESA=Co4BMDBjYTM2OTVkMmRiMDkxNjA3YWFkZGJkMjM4OTVlYWJjMGY0YTVhNWM3OTJkM2NiYWVhOWU1OTkxYTYyMzQ4NjEwMzk5NGEyM2M5NjI1MzM4MGYzOTY3MmZmMjRmOGZiODEyZmEzMDQ5MGJiOTIyYjFkYjJlODA0ZGIwYmIyMTk2NGViNWRkNTdmODcyZhCv1ZuezzI; chats=%7B%22currentConversation%22%3A%2236d19490-29cf-4796-ba06-180249a9bb6f%22%2C%22currentSettings%22%3A%7B%22title%22%3A%22%22%2C%22folder%22%3A%5B%22All%22%5D%7D%2C%22conversationSettings%22%3A%5B%7B%22session_id%22%3A%22a300c5d8-eed1-4e7b-8805-abba1df3ba16%22%2C%22mode%22%3A%22detail%22%2C%22model_type%22%3A%22gpt-4o%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%22a4392bbd-2edd-415e-a470-7e7407243593%22%2C%22mode%22%3A%22detail%22%2C%22model_type%22%3A%22gpt-4o%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%220915e974-42db-43cc-bd34-b8e7e145a87e%22%2C%22mode%22%3A%22detail%22%2C%22model_type%22%3A%22gpt-4o%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%2287854224-7d96-4f64-9a55-65cd49ba9e11%22%2C%22mode%22%3A%22detail%22%2C%22model_type%22%3A%22gpt-4o%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%2255e76ef9-c5dc-4992-a10c-e299f35f7e91%22%2C%22mode%22%3A%22detail%22%2C%22model_type%22%3A%22gpt-4o%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%22a164890d-39e4-4b07-9dc6-b2235cd9b67e%22%2C%22mode%22%3A%22detail%22%2C%22model_type%22%3A%22gpt-4o%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%22ca023a9b-0ab1-4e2e-89d2-17b4c5d751cb%22%2C%22mode%22%3A%22simple%22%2C%22model_type%22%3A%22gpt-4o-mini%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%22d625aeb4-036d-46dd-9fe1-ede3b64bcca0%22%2C%22mode%22%3A%22simple%22%2C%22model_type%22%3A%22gpt-4o-mini%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%22a4d73434-6c3a-491d-ab45-93d3a3679425%22%2C%22mode%22%3A%22simple%22%2C%22model_type%22%3A%22gpt-4o-mini%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%220eb7bd46-71e0-45b2-a8fb-9f1926d88737%22%2C%22mode%22%3A%22simple%22%2C%22model_type%22%3A%22gpt-4o-mini%22%2C%22temperature%22%3A%5B0%5D%7D%2C%7B%22session_id%22%3A%2236d19490-29cf-4796-ba06-180249a9bb6f%22%2C%22mode%22%3A%22simple%22%2C%22model_type%22%3A%22gpt-4o-mini%22%2C%22temperature%22%3A%5B0%5D%7D%5D%2C%22feedback%22%3Anull%2C%22resubmitValue%22%3Anull%2C%22refetchChatList%22%3Afalse%7D
+
