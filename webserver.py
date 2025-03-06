@@ -22,7 +22,7 @@ class WebServer:
 
       print("=== wait client connection ===")
       (client_socket, address) = server_socket.accept()
-      print("f=== complete client connection remote_address: {address} ===")
+      print(f"=== complete client connection remote_address: {address} ===")
 
       request = client_socket.recv(4096)
 
@@ -40,16 +40,18 @@ class WebServer:
       with open(static_file_path, "rb") as f:
         response_body = f.read()
 
+      print(static_file_path, response_body)
+
       response_line = "HTTP/1.1 200 OK\r\n"
 
       response_header = ""
       response_header += f"Date: {datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT')}\r\n"
       response_header += "Host: HenaServer/0.1\r\n"
-      response_header += f"Content-Length: {len(response_body.encode())}\r\n"
+      response_header += f"Content-Length: {len(response_body)}\r\n"
       response_header += "Connection: Close\r\n"
       response_header += "Content-type: text/html\r\n"
 
-      response = (response_line + response_header + "\r\n" + response_body).encode() + request_body
+      response = (response_line + response_header + "\r\n").encode() + response_body
 
       client_socket.send(response)
 

@@ -1,21 +1,20 @@
-GET / HTTP/1.1
+GET /test.html HTTP/1.1
 Host: localhost:8080
 Connection: keep-alive
-Cache-Control: max-age=0
-sec-ch-ua: "Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"
+sec-ch-ua: "Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"
 sec-ch-ua-mobile: ?0
-sec-ch-ua-full-version: "132.0.6834.112"
+sec-ch-ua-full-version: "133.0.6943.142"
 sec-ch-ua-arch: "arm"
 sec-ch-ua-platform: "macOS"
 sec-ch-ua-platform-version: "13.0.1"
 sec-ch-ua-model: ""
 sec-ch-ua-bitness: "64"
 sec-ch-ua-wow64: ?0
-sec-ch-ua-full-version-list: "Not A(Brand";v="8.0.0.0", "Chromium";v="132.0.6834.112", "Google Chrome";v="132.0.6834.112"
+sec-ch-ua-full-version-list: "Not(A:Brand";v="99.0.0.0", "Google Chrome";v="133.0.6943.142", "Chromium";v="133.0.6943.142"
 sec-ch-ua-form-factors: "Desktop"
 sec-ch-prefers-color-scheme: light
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 Sec-Fetch-Site: none
 Sec-Fetch-Mode: navigate
