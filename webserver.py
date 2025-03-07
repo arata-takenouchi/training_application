@@ -30,19 +30,22 @@ class WebServer:
         f.write(request)
 
       request_line, remain = request.split(b"\r\n", maxsplit=1)
-      request_header, request_body = remain.split(b"\r\n\r\n", maxsplit=1)
+      # request_header, request_body = remain.split(b"\r\n\r\n", maxsplit=1)
 
       method, path, http_version = request_line.decode().split(" ")
 
       relative_path = path.lstrip("/")
       static_file_path = os.path.join(self.STATIC_ROOT, relative_path)
 
-      with open(static_file_path, "rb") as f:
-        response_body = f.read()
+      try:
+        with open(static_file_path, "rb") as f:
+          response_body = f.read()
 
-      print(static_file_path, response_body)
+        response_line = "HTTP/1.1 200 OK\r\n"
 
-      response_line = "HTTP/1.1 200 OK\r\n"
+      except OSError:
+        response_body = b"<html><body><h1>404 Not Found</h1></body></html>"
+        response_line = "HTTP/1.1 404 Not Found\r\n"
 
       response_header = ""
       response_header += f"Date: {datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT')}\r\n"
