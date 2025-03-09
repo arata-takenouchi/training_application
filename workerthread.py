@@ -1,9 +1,12 @@
 import os
+from pprint import pformat
+import re
+import textwrap
 import traceback
 from datetime import datetime
 from socket import socket
 from threading import Thread
-from typing import Tuple
+from typing import Optional, Tuple
 
 
 class WorkerThread(Thread):
@@ -45,20 +48,64 @@ class WorkerThread(Thread):
             # HTTPリクエストをパースする
             method, path, http_version, request_header, request_body = self.parse_http_request(request)
 
-            try:
+            response_body: bytes
+            content_type: Optional[str]
+            response_line: str
+
+            if path == "/now":
+              html = f"""\
+                <html>
+                  <body>
+                    <h1>Now: {datetime.now()}</h1>
+                  </body>
+                </html>
+              """
+              response_body = textwrap.dedent(html).encode()
+
+              content_type = "text/html"
+
+              response_line = "HTTP/1.1 200 OK\r\n"
+
+            elif path == "/show_request":
+              html = f"""\
+                <html>
+                <body>
+                  <h1>Request Line:</h1>
+                  <p>
+                    {method} {path} {http_version}
+                  </p>
+                  <h1>Headers:</h1>
+                  <pre>{pformat(request_header)}</pre>
+                  <h1>Body:</h1>
+                  <pre>{request_body.decode("utf-8", "ignore")}</pre>
+                </body>
+                </html>
+              """
+              response_body = textwrap.dedent(html).encode()
+
+              content_type = "text/html"
+
+              response_line = "HTTP/1.1 200 OK\r\n"
+
+            else:
+              try:
                 # ファイルからレスポンスボディを生成
                 response_body = self.get_static_file_content(path)
+                content_type = None
 
                 # レスポンスラインを生成
                 response_line = "HTTP/1.1 200 OK\r\n"
 
-            except OSError:
+              except OSError:
+                traceback.print_exc
+
                 # ファイルが見つからなかった場合は404を返す
                 response_body = b"<html><body><h1>404 Not Found</h1></body></html>"
+                content_type = "text/html"
                 response_line = "HTTP/1.1 404 Not Found\r\n"
 
             # レスポンスヘッダーを生成
-            response_header = self.build_response_header(path, response_body)
+            response_header = self.build_response_header(path, response_body, content_type)
 
             # レスポンス全体を生成する
             response = (response_line + response_header + "\r\n").encode() + response_body
@@ -77,7 +124,7 @@ class WorkerThread(Thread):
             print(f"=== Worker: クライアントとの通信を終了します remote_address: {self.client_address} ===")
             self.client_socket.close()
 
-    def parse_http_request(self, request: bytes) -> Tuple[str, str, str, bytes, bytes]:
+    def parse_http_request(self, request: bytes) -> Tuple[str, str, str, dict, bytes]:
         """
         HTTPリクエストを
         1. method: str
@@ -99,7 +146,12 @@ class WorkerThread(Thread):
         # リクエストラインを文字列に変換してパースする
         method, path, http_version = request_line.decode().split(" ")
 
-        return method, path, http_version, request_header, request_body
+        headers = {}
+        for header_row in request_header.decode().split("\r\n"):
+          key, value = re.split(r": *", header_row, maxsplit=1)
+          headers[key] = value
+
+        return method, path, http_version, headers, request_body
 
     def get_static_file_content(self, path: str) -> bytes:
         """
@@ -114,19 +166,18 @@ class WorkerThread(Thread):
         with open(static_file_path, "rb") as f:
             return f.read()
 
-    def build_response_header(self, path: str, response_body: bytes) -> str:
+    def build_response_header(self, path: str, response_body: bytes, content_type: Optional[str]) -> str:
         """
         レスポンスヘッダーを構築する
         """
-        # ヘッダー生成のためにContent-Typeを取得しておく
-        # pathから拡張子を取得
-        if "." in path:
-            ext = path.rsplit(".", maxsplit=1)[-1]
-        else:
-            ext = ""
-        # 拡張子からMIME Typeを取得
-        # 知らない対応していない拡張子の場合はoctet-streamとする
-        content_type = self.MIME_TYPES.get(ext, "application/octet-stream")
+        if content_type is None:
+          if "." in path:
+              ext = path.rsplit(".", maxsplit=1)[-1]
+          else:
+              ext = ""
+          # 拡張子からMIME Typeを取得
+          # 知らない対応していない拡張子の場合はoctet-streamとする
+          content_type = self.MIME_TYPES.get(ext, "application/octet-stream")
 
         response_header = ""
         response_header += f"Date: {datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT')}\r\n"
