@@ -4,7 +4,13 @@ from datetime import datetime
 from pprint import pformat
 from typing import Optional, Tuple
 
-def now() -> Tuple[bytes, Optional[str], str]:
+def now(
+  method: str,
+  path: str,
+  http_version: str,
+  request_header: dict,
+  request_body: bytes,
+) -> Tuple[bytes, Optional[str], str]:
   html = f"""\
     <html>
       <body>
@@ -51,7 +57,10 @@ def show_request(
 
 def parameters(
   method: str,
-  request_body: bytes
+  path: str,
+  http_version: str,
+  request_header: dict,
+  request_body: bytes,
 ) -> Tuple[bytes, Optional[str], str]:
   if method == "GET":
     response_body = b"<html><body><h1>405 Method Not Allowed</h1></body></html>"
