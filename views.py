@@ -2,15 +2,11 @@ import textwrap
 import urllib.parse
 from datetime import datetime
 from pprint import pformat
-from typing import Optional, Tuple
 
-def now(
-  method: str,
-  path: str,
-  http_version: str,
-  request_header: dict,
-  request_body: bytes,
-) -> Tuple[bytes, Optional[str], str]:
+from henago.http.request import HTTPRequest
+from henago.http.response import HTTPResponse
+
+def now(request: HTTPRequest) -> HTTPResponse:
   html = f"""\
     <html>
       <body>
@@ -24,15 +20,9 @@ def now(
 
   response_line = "HTTP/1.1 200 OK\r\n"
 
-  return response_body, content_type, response_line
+  return HTTPResponse(body=response_body, content_type=content_type, status_code=200)
 
-def show_request(
-  method: str,
-  path: str,
-  http_version: str,
-  request_header: dict,
-  request_body: bytes,
-) -> Tuple[bytes, Optional[str], str]:
+def show_request(request: HTTPRequest) -> HTTPResponse:
   html = f"""\
     <html>
     <body>
@@ -53,15 +43,9 @@ def show_request(
 
   response_line = "HTTP/1.1 200 OK\r\n"
 
-  return response_body, content_type, response_line
+  return HTTPResponse(body=response_body, content_type=content_type, status_code=200)
 
-def parameters(
-  method: str,
-  path: str,
-  http_version: str,
-  request_header: dict,
-  request_body: bytes,
-) -> Tuple[bytes, Optional[str], str]:
+def parameters(request: HTTPRequest) -> HTTPResponse:
   if method == "GET":
     response_body = b"<html><body><h1>405 Method Not Allowed</h1></body></html>"
     content_type = "text/html; charset=UTF-8"
@@ -83,4 +67,4 @@ def parameters(
 
     response_line = "HTTP/1.1 200 OK\r\n"
 
-  return response_body, content_type, response_line
+  return HTTPResponse(body=response_body, content_type=content_type, status_code=200)
