@@ -7,6 +7,7 @@ from threading import Thread
 import views
 from henago.http.request import HTTPRequest
 from henago.http.response import HTTPResponse
+from urls import URL_VIEW
 
 class WorkerThread(Thread):
     # 実行ファイルのあるディレクトリ
@@ -23,19 +24,13 @@ class WorkerThread(Thread):
         "gif": "image/gif",
     }
 
-    URL_VIEW = {
-      "/now": views.now,
-      "/show_request": views.show_request,
-      "/parameters": views.parameters,
-    }
-
     STATUS_LINES = {
       200: "200 OK",
       404: "404 Not Found",
       405: "405 Method Not Allowed",
     }
 
-    def __init__(self, client_socket: socket, address: Tuple[str, int]):
+    def __init__(self, client_socket: socket, address: tuple[str, int]):
         super().__init__()
 
         self.client_socket = client_socket
@@ -58,8 +53,8 @@ class WorkerThread(Thread):
           # HTTPリクエストをパースする
           request = self.parse_http_request(request)
 
-          if request.path in self.URL_VIEW:
-            view = self.URL_VIEW[request.path]
+          if request.path in URL_VIEW:
+            view = URL_VIEW[request.path]
             response = view(request)
 
           else:
@@ -99,7 +94,7 @@ class WorkerThread(Thread):
           print(f"=== Worker: クライアントとの通信を終了します remote_address: {self.client_address} ===")
           self.client_socket.close()
 
-    def parse_http_request(self, request: bytes) -> Tuple[str, str, str, dict, bytes]:
+    def parse_http_request(self, request: bytes) -> tuple[str, str, str, dict, bytes]:
         """
         HTTPリクエストを
         1. method: str
