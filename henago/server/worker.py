@@ -49,9 +49,12 @@ class Worker(Thread):
           # HTTPリクエストをパースする
           request = self.parse_http_request(request)
 
-          if request.path in URL_VIEW:
-            view = URL_VIEW[request.path]
-            response = view(request)
+          for url_pattern, view in URL_VIEW.items():
+            match = self.url_match(url_pattern, request.path)
+            if match:
+              request.params_update(match.groupdict())
+              response = view(request)
+              break
 
           else:
             try:
