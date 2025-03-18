@@ -8,7 +8,7 @@ import settings
 import views
 from henago.http.request import HTTPRequest
 from henago.http.response import HTTPResponse
-from urls import url_patterns
+from henago.urls.resolver import URLResolver
 
 class Worker(Thread):
     # 拡張子とMIME Typeの対応
@@ -49,13 +49,10 @@ class Worker(Thread):
           # HTTPリクエストをパースする
           request = self.parse_http_request(request)
 
-          for url_pattern in url_patterns:
-            match = url_pattern.match(request.path)
-            if match:
-              request.params.update(match.groupdict())
-              view = url_pattern.view
-              response = view(request)
-              break
+          view = URLResolver().resolve(request)
+
+          if view:
+            response = view(request)
 
           else:
             try:
