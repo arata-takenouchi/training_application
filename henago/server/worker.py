@@ -51,23 +51,7 @@ class Worker(Thread):
 
           view = URLResolver().resolve(request)
 
-          if view:
-            response = view(request)
-
-          else:
-            try:
-              # ファイルからレスポンスボディを生成
-              response_body = self.get_static_file_content(path)
-              content_type = None
-              response = HTTPResponse(body=response_body, content_type=content_type, status_code=200)
-
-            except OSError:
-              traceback.print_exc()
-
-              # ファイルが見つからなかった場合は404を返す
-              response_body = b"<html><body><h1>404 Not Found</h1></body></html>"
-              content_type = "text/html; charset=UTF-8"
-              response = HTTPResponse(body=response_body, content_type=content_type, status_code=200)
+          response = view(request)
 
           response_line = self.build_response_line(response)
 

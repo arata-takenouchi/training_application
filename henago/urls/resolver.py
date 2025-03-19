@@ -2,6 +2,7 @@ from typing import Callable, Optional
 
 from henago.http.request import HTTPRequest
 from henago.http.response import HTTPResponse
+from henago.http.static import static
 from urls import url_patterns
 
 class URLResolver:
@@ -12,4 +13,4 @@ class URLResolver:
         request.params.update(match.groupdict())
         return url_pattern.view
 
-    return None
+    return static
