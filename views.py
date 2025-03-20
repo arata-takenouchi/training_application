@@ -7,20 +7,14 @@ from henago.http.request import HTTPRequest
 from henago.http.response import HTTPResponse
 
 def now(request: HTTPRequest) -> HTTPResponse:
-  html = f"""\
-    <html>
-      <body>
-        <h1>Now: {datetime.now()}</h1>
-      </body>
-    </html>
-  """
-  response_body = textwrap.dedent(html).encode()
+  with open("./templates/now.html") as f:
+    template = f.read()
+    html = template.format(now=datetime.now())
 
+  body = textwrap.dedent(html).encode()
   content_type = "text/html; charset=UTF-8"
 
-  response_line = "HTTP/1.1 200 OK\r\n"
-
-  return HTTPResponse(body=response_body, content_type=content_type, status_code=200)
+  return HTTPResponse(body=body, content_type=content_type, status_code=200)
 
 def show_request(request: HTTPRequest) -> HTTPResponse:
   html = f"""\
