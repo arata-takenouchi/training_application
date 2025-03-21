@@ -5,13 +5,13 @@ from pprint import pformat
 
 from henago.http.request import HTTPRequest
 from henago.http.response import HTTPResponse
+from henago.template.render import render
 
 def now(request: HTTPRequest) -> HTTPResponse:
-  with open("./templates/now.html") as f:
-    template = f.read()
-    html = template.format(now=datetime.now())
+  context = {"now": datetime.now()}
+  html = render("./templates/now.html", context)
 
-  body = textwrap.dedent(html).encode()
+  body = html.encode()
   content_type = "text/html; charset=UTF-8"
 
   return HTTPResponse(body=body, content_type=content_type, status_code=200)
