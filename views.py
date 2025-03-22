@@ -9,7 +9,7 @@ from henago.template.render import render
 
 def now(request: HTTPRequest) -> HTTPResponse:
   context = {"now": datetime.now()}
-  html = render("./templates/now.html", context)
+  html = render("now.html", context)
 
   body = html.encode()
   content_type = "text/html; charset=UTF-8"
