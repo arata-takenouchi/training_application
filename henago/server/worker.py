@@ -3,9 +3,8 @@ import re
 import traceback
 from socket import socket
 from threading import Thread
+from typing import Tuple
 
-import settings
-import views
 from henago.http.request import HTTPRequest
 from henago.http.response import HTTPResponse
 from henago.urls.resolver import URLResolver
@@ -40,18 +39,21 @@ class Worker(Thread):
 
         try:
           # クライアントから送られてきたデータを取得する
-          request = self.client_socket.recv(4096)
+          request_bytes = self.client_socket.recv(4096)
 
           # クライアントから送られてきたデータをファイルに書き出す
           with open("server_recv.txt", "wb") as f:
-            f.write(request)
+            f.write(request_bytes)
 
           # HTTPリクエストをパースする
-          request = self.parse_http_request(request)
+          request = self.parse_http_request(request_bytes)
 
           view = URLResolver().resolve(request)
 
           response = view(request)
+
+          if isinstance(response.body, str):
+            response.body = response.body.encode()
 
           response_line = self.build_response_line(response)
 
