@@ -10,9 +10,8 @@ from henago.template.render import render
 def now(request: HTTPRequest) -> HTTPResponse:
   context = {"now": datetime.now()}
   body = render("now.html", context)
-  content_type = "text/html; charset=UTF-8"
 
-  return HTTPResponse(body=body, content_type=content_type, status_code=200)
+  return HTTPResponse(body=body)
 
 def show_request(request: HTTPRequest) -> HTTPResponse:
   html = f"""\
@@ -29,19 +28,15 @@ def show_request(request: HTTPRequest) -> HTTPResponse:
     </body>
     </html>
   """
-  response_body = textwrap.dedent(html).encode()
+  body = textwrap.dedent(html).encode()
 
-  content_type = "text/html; charset=UTF-8"
-
-  response_line = "HTTP/1.1 200 OK\r\n"
-
-  return HTTPResponse(body=response_body, content_type=content_type, status_code=200)
+  return HTTPResponse(body=body)
 
 def parameters(request: HTTPRequest) -> HTTPResponse:
   if method == "GET":
-    response_body = b"<html><body><h1>405 Method Not Allowed</h1></body></html>"
+    body = b"<html><body><h1>405 Method Not Allowed</h1></body></html>"
     content_type = "text/html; charset=UTF-8"
-    response_line = "HTTP/1.1 405 Method Not Allowed\r\n"
+    status_code = 405
 
   elif method == "POST":
     post_params = urllib.parse.parse_qs(request_body.decode())
@@ -54,12 +49,10 @@ def parameters(request: HTTPRequest) -> HTTPResponse:
         </html>
     """
     response_body = textwrap.dedent(html).encode()
-
     content_type = "text/html; charset=UTF-8"
+    status_code = 200
 
-    response_line = "HTTP/1.1 200 OK\r\n"
-
-  return HTTPResponse(body=response_body, content_type=content_type, status_code=200)
+  return HTTPResponse(body=response_body, content_type=content_type, status_code=status_code)
 
 def user_profile(request: HTTPRequest) -> HTTPResponse:
   user_id = request.params["user_id"]
