@@ -1,10 +1,12 @@
 from typing import Optional, Union, Dict
 
+from henago.http.cookie import Cookie
+
 
 class HTTPResponse:
     status_code: int
     headers: dict
-    cookies: dict
+    cookies: List[Cookie]
     content_type: Optional[str]
     body: Union[bytes, str]
 
@@ -19,7 +21,7 @@ class HTTPResponse:
         if headers is None:
             headers = {}
         if cookies is None:
-            cookies = {}
+            cookies = []
 
         self.status_code = status_code
         self.headers = headers

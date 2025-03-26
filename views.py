@@ -47,7 +47,12 @@ def login(request: HTTPRequest) -> HTTPResponse:
     username = post_params["username"][0]
     email = post_params["email"][0]
 
-    return HTTPResponse(status_code=302, headers={"Location": "/welcome"}, cookies={"username": username, "email": email})
+    cookies = [
+      Cookie(name="username", value=username, max_age=30),
+      Cookie(name="email", value=email, max_age=30),
+    ]
+
+    return HTTPResponse(status_code=302, headers={"Location": "/welcome"}, cookies=cookies)
 
 def welcome(request: HTTPRequest) -> HTTPResponse:
   if "username" not in request.cookies:
